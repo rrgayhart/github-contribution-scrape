@@ -17,7 +17,7 @@ Dir[File.dirname(__FILE__) + '/models/*.rb'].each {|file| require file }
      url = streak.contribution_link(user_name)
      c = streak.contributions_today(url)
      d = streak.days_without_contributions(url)
-     "#{user_name} has made #{c} contributions today. In the past 365 days, #{user_name} has had #{d} days without any contributions."
+     "#{user_name} has made #{c} contribution(s) today. In the past 366 days, #{user_name} has had #{d} day(s) without any contributions."
   end
 
 
