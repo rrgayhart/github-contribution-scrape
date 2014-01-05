@@ -2,23 +2,31 @@ require 'sinatra'
 require 'sinatra/activerecord'
 Dir[File.dirname(__FILE__) + '/models/*.rb'].each {|file| require file }
 
+env_index = ARGV.index("-e")
+env_arg = ARGV[env_index + 1] if env_index
+env = env_arg || ENV["SINATRA_ENV"] || "development"
+
+use ActiveRecord::ConnectionAdapters::ConnectionManagement # close connection to the DDBB properly...https://github.com/puma/puma/issues/59
+databases = YAML.load_file("config/database.yml")
+ActiveRecord::Base.establish_connection(databases[env])
+
+if env == 'test'
+  User.destroy_all
+end
 
 
-  set :database_file, "config/database.yml"
-  register Sinatra::ActiveRecordExtension
+get '/' do
+  "Add your github username after the slash in the address to get your stats"
+end
 
-  get '/' do
-    "Add your github username after the slash in the address to get your stats"
-  end
-
-  get '/:name' do
-     user_name = params[:name]
-     streak = Streak.new
-     url = streak.contribution_link(user_name)
-     c = streak.contributions_today(url)
-     d = streak.days_without_contributions(url)
-     "#{user_name} has made #{c} contribution(s) today. In the past 366 days, #{user_name} has had #{d} day(s) without any contributions."
-  end
+get '/:name' do
+   user_name = params[:name]
+   streak = Streak.new
+   url = streak.contribution_link(user_name)
+   c = streak.contributions_today(url)
+   d = streak.days_without_contributions(url)
+   "#{user_name} has made #{c} contribution(s) today. In the past 366 days, #{user_name} has had #{d} day(s) without any contributions."
+end
 
 
 

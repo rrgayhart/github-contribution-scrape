@@ -5,13 +5,13 @@ class MyAppTest < MiniTest::Unit::TestCase
   include Rack::Test::Methods
 
   def app
-    GitApp
+    Sinatra::Application
   end
 
   def test_it_returns_a_webpage
     get '/'
     assert last_response.ok?
-    assert_equal 'Hello World!', last_response.body
+    assert_equal 200, last_response.status
   end
 
 end
