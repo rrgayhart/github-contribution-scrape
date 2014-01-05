@@ -21,7 +21,7 @@ class StreakTest < Minitest::Unit::TestCase
 
   def test_current_streak
     assert_equal 0, @streak.current_streak("url", @stub_zero_contributions)
-    assert_equal 0, @streak.current_streak("url", @stub_break_time)
+    assert_equal 3, @streak.current_streak("url", @stub_break_time)
     assert_equal 4, @streak.current_streak("url", @stub_many_contributions)
     assert_equal 1, @streak.current_streak("url", @stub_array)
   end
