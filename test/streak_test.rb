@@ -9,6 +9,21 @@ class StreakTest < Minitest::Unit::TestCase
     @stub_array = self.stub_history
     @stub_zero_contributions = self.stub_history_short
     @stub_many_contributions = self.stub_history_large
+    @stub_break_time = self.stub_history_taking_a_break
+    @url = @streak.contribution_link("rrgayhart")
+  end
+
+  def test_contributions_yesterday
+    #actual connection to github
+    #assert_equal @streak.contributions_yesterday(@url), 2
+    assert_equal 3, @streak.contributions_yesterday("url", @stub_many_contributions)
+  end
+
+  def test_current_streak
+    assert_equal 0, @streak.current_streak("url", @stub_zero_contributions)
+    assert_equal 0, @streak.current_streak("url", @stub_break_time)
+    assert_equal 4, @streak.current_streak("url", @stub_many_contributions)
+    assert_equal 1, @streak.current_streak("url", @stub_array)
   end
 
   def test_contribution_link_formats_username

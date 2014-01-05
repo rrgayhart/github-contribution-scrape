@@ -22,6 +22,30 @@ class Streak
     body.last.last
   end
 
+  def contributions_yesterday(url, stub=nil)
+    body = get_contributions_array(url, stub)
+    body[-2].last
+  end
+
+  def current_streak(url, stub=nil)
+    array = get_contributions_array(url, stub)
+    today = array.pop
+    if today.last == 0
+      current = 0
+    else
+      current = 1
+      array.count.times do
+        day = array.pop
+        if day.last != 0
+          current += 1
+        else
+          break
+        end
+      end
+    end
+    current
+  end
+
   def days_without_contributions(url)
     body = get_contributions_array(url)
     dates = body.select do |date|
