@@ -44,5 +44,10 @@ class StreakTest < Minitest::Unit::TestCase
     assert_equal 3000, @streak.contributions_today("url", @stub_many_contributions)
   end
 
+  def test_year_returns_default_of_this_year
+    assert_equal Date.today.year, @streak.year
+    assert_equal 2012, @streak.year(2012) 
+  end
+
 
 end

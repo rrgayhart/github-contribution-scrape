@@ -55,11 +55,7 @@ class Streak
   end
 
   def year(default=nil)
-    if default
-      return default
-    else
-      Date.today.year
-    end
+    default ||= Date.today.year
   end
 
   def days_this_year_without_contributions(url, y=nil)
