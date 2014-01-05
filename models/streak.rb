@@ -7,13 +7,18 @@ class Streak
     "https://github.com/users/#{username}/contributions_calendar_data"
   end
 
-  def get_contributions_array(url)
-    response = Faraday.get(url)
-    JSON.parse(response.body)
+  def get_contributions_array(url, stub=nil)
+    unless stub
+      response = Faraday.get(url)
+      body = JSON.parse(response.body)
+    else
+      body = stub
+    end
+    body
   end
 
-  def contributions_today(url)
-    body = get_contributions_array(url)
+  def contributions_today(url, stub=nil)
+    body = get_contributions_array(url, stub)
     body.last.last
   end
 
