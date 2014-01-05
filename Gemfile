@@ -8,3 +8,5 @@ gem "rake"
 
 gem 'minitest', require: false
 gem 'rack-test', require: false
+gem 'faraday'
+gem 'json'

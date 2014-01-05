@@ -25,21 +25,21 @@ class Streak
     dates.count
   end
 
-  def days_this_year_without_contributions(url)
-    body = get_contributions_array(url)
-    year = Date.today.year.to_s
-    dates = body.select do |date|
-      date.last < 1 && date.first.include?(year)
-    end
-    dates.count
-  end
-
   def year(default=nil)
     if default
       return default
     else
       Date.today.year
     end
+  end
+
+  def days_this_year_without_contributions(url, y=nil)
+    body = get_contributions_array(url)
+    year = Date.today.year.to_s
+    dates = body.select do |date|
+      date.last < 1 && date.first.include?(year(y))
+    end
+    dates.count
   end
 
   def days_in_the_year_with_contributions(url, y=nil)
