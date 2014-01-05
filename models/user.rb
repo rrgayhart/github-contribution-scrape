@@ -53,6 +53,13 @@ class User < ActiveRecord::Base
     comparisons = {}
     comparisons[:total_days] = Date.today.yday
     comparisons[:contributions] = days_in_the_year_with_contributions(url)
+    comparisons
+  end
+
+  def percentage_commits_this_year(url)
+    a = comparisons(url)[:contributions]
+    b = comparisons(url)[:total_days]
+    a/b.round(2)
   end
 
 end
