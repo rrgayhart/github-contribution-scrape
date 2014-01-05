@@ -30,10 +30,11 @@ class Streak
   def current_streak(url, stub=nil)
     array = get_contributions_array(url, stub)
     today = array.pop
-    if today.last == 0
-      current = 0
-    else
-      current = 1
+    current = 0
+    current += 1 if today.last != 0
+    yesterday = array.pop
+    if yesterday.last != 0
+      current += 1
       array.count.times do
         day = array.pop
         if day.last != 0
@@ -75,7 +76,7 @@ class Streak
     dates.count
   end
 
-  def comparisons(url, y=nil)
+  def comparison(url, y=nil)
     comparisons = {}
     if y && y.to_s != Date.today.yday
       comparisons[:total_days] = 365
@@ -86,15 +87,9 @@ class Streak
     comparisons
   end
 
-  def percentage_commits_this_year(url)
-    a = comparisons(url)[:contributions]
-    b = comparisons(url)[:total_days]
-    a/b.round(2)
-  end
-
-  def percentage_commits_per_year(url, year)
-    a = comparisons(url, year)[:contributions]
-    b = comparisons(url, year)[:total_days]
+  def percentage_commits_per_year(comparison)
+    a = comparison[:contributions]
+    b = comparison[:total_days]
     a/b.round(2)
   end
 end

@@ -16,16 +16,24 @@ end
 
 
 get '/' do
-  "Add your github username after the slash in the address to get your stats"
+  erb :index
 end
 
 get '/:name' do
-   user_name = params[:name]
-   streak = Streak.new
-   url = streak.contribution_link(user_name)
-   c = streak.contributions_today(url)
-   d = streak.days_without_contributions(url)
-   "#{user_name} has made #{c} contribution(s) today. In the past 366 days, #{user_name} has had #{d} day(s) without any contributions."
+  @user_name = params[:name]
+  streak = Streak.new
+  url = streak.contribution_link(@user_name)
+  @today = streak.contributions_today(url)
+  @no_contributions = streak.days_without_contributions(url)
+  @current_streak = streak.current_streak(url)
+  com = streak.comparison(url)
+  @this_year = streak.days_in_the_year_with_contributions(url)
+  @days = com[:total_days]
+  @percentage = streak.percentage_commits_per_year(com)
+  @last_year = streak.days_in_the_year_with_contributions(url, 2013)
+  com_last = streak.comparison(url, 2013)
+  @percentage_last_year = streak.percentage_commits_per_year(com_last)
+  erb :streak
 end
 
 

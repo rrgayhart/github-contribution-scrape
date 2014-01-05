@@ -1,0 +1,11 @@
+<h3><%= @user_name %> has made <%= @today %> contribution(s) today.</h3>
+<h3>In the past 366 days, <%= @user_name %> has had <%= @no_contributions %> day(s) without any contributions.
+<h3><%= @user_name %> is rocking a <%= @current_streak %> day current streak </h3>
+
+<h3>There have been <%= @days %> day(s) this year, and of them <%= @user_name %> has contributed to open source <%= @this_year %> day(s)</h3>
+
+<h3>This year's average days with contributions is <%= (@percentage * 100).ceil %>% </h3> 
+
+<h3>Last year <%= @user_name %> contributed to open source <%= @last_year %> day(s)</h3>
+
+<h3>Last year's average days with contributions was <%= (@percentage_last_year * 100).ceil %>% </h3> 
