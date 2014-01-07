@@ -16,4 +16,8 @@ module GitFake
     [["2014/01/01", 1], ["2014/01/02", 1], ["2014/01/03", 1], ["2014/01/04", 0]]
   end
 
+  def stub_user_detail
+    {"login"=>"mhartl", "id"=>6232, "avatar_url"=>"https://gravatar.com/avatar/ffda7d145b83c4b118f982401f962ca6?d=https%3A%2F%2Fidenticons.github.com%2F575425a3f433138553be468c9d1ecba7.png&r=x", "gravatar_id"=>"ffda7d145b83c4b118f982401f962ca6", "url"=>"https://api.github.com/users/mhartl", "html_url"=>"https://github.com/mhartl", "followers_url"=>"https://api.github.com/users/mhartl/followers", "following_url"=>"https://api.github.com/users/mhartl/following{/other_user}", "gists_url"=>"https://api.github.com/users/mhartl/gists{/gist_id}", "starred_url"=>"https://api.github.com/users/mhartl/starred{/owner}{/repo}", "subscriptions_url"=>"https://api.github.com/users/mhartl/subscriptions", "organizations_url"=>"https://api.github.com/users/mhartl/orgs", "repos_url"=>"https://api.github.com/users/mhartl/repos", "events_url"=>"https://api.github.com/users/mhartl/events{/privacy}", "received_events_url"=>"https://api.github.com/users/mhartl/received_events", "type"=>"User", "site_admin"=>false, "name"=>"Michael Hartl", "company"=>"", "blog"=>"http://railstutorial.org/", "location"=>"Pasadena, CA", "email"=>"michael@michaelhartl.com", "hireable"=>false, "bio"=>nil, "public_repos"=>29, "public_gists"=>0, "followers"=>1096, "following"=>2, "created_at"=>"2008-04-10T19:19:55Z", "updated_at"=>"2013-05-07T10:10:45Z"}
+  end
+
 end

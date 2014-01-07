@@ -55,6 +55,10 @@ class Streak
     dates.count
   end
 
+  def select_recent_dates(body, num)
+    last_num_days = body.reverse.take(num)
+  end
+
   def year(default=nil)
     default ||= Date.today.year
   end

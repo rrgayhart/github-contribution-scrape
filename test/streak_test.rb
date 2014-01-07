@@ -49,5 +49,13 @@ class StreakTest < Minitest::Unit::TestCase
     assert_equal 2012, @streak.year(2012) 
   end
 
+  def test_select_recent_dates_pulls_per_number
+    assert_equal 3, @streak.select_recent_dates(@stub_array, 3).count
+  end
+
+  def test_select_recent_sates_pulls_most_recent_commits
+    array = ["one", "two", "three", "four"]
+    assert_equal @streak.select_recent_dates(array, 2), ["four", "three"]
+  end
 
 end
