@@ -3,32 +3,33 @@ require 'json'
 
 class Streak
 
-  def contribution_link(username)
-    "https://github.com/users/#{username}/contributions_calendar_data"
+  attr_reader :user
+  attr_accessor :user_array
+
+  def initialize(username)
+    @user = username
+    @user_array = get_contributions_array(contribution_link)
   end
 
-  def get_contributions_array(url, stub=nil)
-    unless stub
+  def contribution_link
+    "https://github.com/users/#{user}/contributions_calendar_data"
+  end
+
+  def get_contributions_array(url)
       response = Faraday.get(url)
-      body = JSON.parse(response.body)
-    else
-      body = stub
-    end
-    body
+      JSON.parse(response.body)
   end
 
-  def contributions_today(url, stub=nil)
-    body = get_contributions_array(url, stub)
-    body.last.last
+  def contributions_today
+    @user_array.last.last
   end
 
-  def contributions_yesterday(url, stub=nil)
-    body = get_contributions_array(url, stub)
-    body[-2].last
+  def contributions_yesterday
+    @user_array[-2].last
   end
 
-  def current_streak(url, stub=nil)
-    array = get_contributions_array(url, stub)
+  def current_streak
+    array = @user_array
     today = array.pop
     current = 0
     current += 1 if today.last != 0
@@ -47,47 +48,53 @@ class Streak
     current
   end
 
-  def days_without_contributions(url)
-    body = get_contributions_array(url)
-    dates = body.select do |date|
+  def days_without_contributions
+    dates = @user_array.select do |date|
       date.last < 1
     end
     dates.count
   end
 
-  def select_recent_dates(body, num)
-    last_num_days = body.reverse.take(num)
+  def days_with_contributions
+    dates = @user_array.select do |date|
+      date.last >= 1
+    end
+    dates.count
+  end
+
+  def select_recent_dates(num)
+    last_num_days = @user_array.reverse.take(num)
   end
 
   def year(default=nil)
     default ||= Date.today.year
   end
 
-  def days_this_year_without_contributions(url, y=nil)
-    body = get_contributions_array(url)
-    year = Date.today.year.to_s
-    dates = body.select do |date|
-      date.last < 1 && date.first.include?(year(y))
+  def days_this_year_without_contributions
+    dates = @user_array.select do |date|
+      date.last < 1 && date.first.include?(year.to_s)
     end
     dates.count
   end
 
-  def days_in_the_year_with_contributions(url, y=nil)
-    body = get_contributions_array(url)
-    dates = body.select do |date|
-      date.last >= 1 && date.first.include?(year(y).to_s)
+  def days_this_year_with_contributions
+    dates = @user_array.select do |date|
+      date.last >= 1 && date.first.include?(year.to_s)
     end
     dates.count
   end
 
-  def comparison(url, y=nil)
+  def comparison_this_year
     comparisons = {}
-    if y && y.to_s != Date.today.yday
-      comparisons[:total_days] = 365
-    else
-      comparisons[:total_days] = Date.today.yday
-    end
-    comparisons[:contributions] = days_in_the_year_with_contributions(url, y)
+    comparisons[:total_days] = Date.today.yday
+    comparisons[:contributions] = days_this_year_with_contributions
+    comparisons
+  end
+
+  def comparison_years_time
+    comparisons = {}
+    comparisons[:total_days] = @user_array.length
+    comparisons[:contributions] = days_with_contributions
     comparisons
   end
 
