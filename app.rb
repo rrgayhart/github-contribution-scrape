@@ -21,18 +21,18 @@ end
 
 get '/:name' do
   @user_name = params[:name]
-  streak = Streak.new
-  url = streak.contribution_link(@user_name)
-  @today = streak.contributions_today(url)
-  @no_contributions = streak.days_without_contributions(url)
-  @current_streak = streak.current_streak(url)
-  com = streak.comparison(url)
-  @this_year = streak.days_in_the_year_with_contributions(url)
+  streak = Streak.new(@user_name)
+  @history = History.new(@user_name)
+  @today = streak.contributions_today
+  @no_contributions = streak.days_without_contributions
+  @current_streak = streak.current_streak
+  com = streak.comparison_this_year
+  @this_year = streak.days_this_year_with_contributions
   @days = com[:total_days]
   @percentage = streak.percentage_commits_per_year(com)
-  @last_year = streak.days_in_the_year_with_contributions(url, 2013)
-  com_last = streak.comparison(url, 2013)
-  @percentage_last_year = streak.percentage_commits_per_year(com_last)
+  @signed_up = @history.user_created_date
+  long_com = streak.comparison_years_time
+  @long_percentage = streak.percentage_commits_per_year(long_com)
   erb :streak
 end
 

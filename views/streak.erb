@@ -4,8 +4,13 @@
 
 <h3>There have been <%= @days %> day(s) this year, and of them <%= @user_name %> has contributed to open source <%= @this_year %> day(s)</h3>
 
-<h3>This year's average days with contributions is <%= (@percentage * 100).ceil %>% </h3> 
+<h3>This year's average days with contributions is <%= (@percentage * 100).ceil %>% </h3>
 
-<h3>Last year <%= @user_name %> contributed to open source <%= @last_year %> day(s)</h3>
+<% if @history.new_user? %>
 
-<h3>Last year's average days with contributions was <%= (@percentage_last_year * 100).ceil %>% </h3> 
+<% else %>
+  <h3><%= @user_name %>'s average days with contributions for the last 365 days has been <%=(@long_percentage * 100).ceil %>%</h3>
+<% end %>
+
+<h3><%= @user_name %> has been a member since <%= @signed_up %></h3>
+
