@@ -25,8 +25,11 @@ class History
   end
 
   def new_user?
-    days_since = Date.today - user_created_date
-    days_since < 366
+    days_since_joining_github < 366
+  end
+
+  def days_since_joining_github
+    Date.today - user_created_date
   end
 
 end

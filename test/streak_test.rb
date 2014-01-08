@@ -94,4 +94,14 @@ class StreakTest < Minitest::Unit::TestCase
   def test_percentage_commits_per_year_returns_percentage
     assert_equal 0.5, @streak.percentage_commits_per_year({:total_days=>10, :contributions=>5})
   end
+
+  def test_array_since_joining_returns_arry_of_days_since_joining
+    history = History.new("newuser")
+    stub = self.stub_user_detail
+    past_date = Time.now - 60*60*24*14
+    stub["created_at"] = past_date
+    history.user_hash = stub
+    assert_equal "boo", @streak.array_since_joining(history)
+  end
+
 end

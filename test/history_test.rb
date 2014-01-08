@@ -26,7 +26,15 @@ class HistoryTest < Minitest::Unit::TestCase
   end
 
   def test_new_user_method_returns_true_for_new_user
-    @history.user_hash["created_at"] = Date.yesterday
+    @history.user_hash["created_at"] = Date.today
     assert_equal true, @history.new_user?
+  end
+
+  def test_days_since_joining_github
+    stub = self.stub_user_detail
+    past_date = Time.now - 60*60*24*14
+    stub["created_at"] = past_date
+    @history.user_hash = stub
+    assert_equal 14, @history.days_since_joining_github
   end
 end

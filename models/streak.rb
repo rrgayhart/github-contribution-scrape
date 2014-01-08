@@ -103,4 +103,9 @@ class Streak
     b = comparison[:total_days]
     a/b.round(2)
   end
+
+  def array_since_joining(history)
+    history = History.new(self.user)
+    #start_date = history.user_created_date
+  end
 end
