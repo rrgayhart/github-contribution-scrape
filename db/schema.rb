@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140109013311) do
+ActiveRecord::Schema.define(version: 20140109042757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20140109013311) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "github_start"
+    t.string   "contribution_history", default: [], array: true
   end
 
 end

@@ -11,6 +11,10 @@ class Streak
     @user_array = get_contributions_array(contribution_link)
   end
 
+  def get_contributions
+    get_contributions_array(contribution_link)
+  end
+
   def contribution_link
     "https://github.com/users/#{user}/contributions_calendar_data"
   end
@@ -18,6 +22,10 @@ class Streak
   def get_contributions_array(url)
       response = Faraday.get(url)
       JSON.parse(response.body)
+  end
+
+  def contribution_array_today
+    @user_array.last
   end
 
   def contributions_today

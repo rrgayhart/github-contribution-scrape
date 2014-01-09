@@ -11,6 +11,10 @@ class History
     @user_hash = user_detail_hash(user_link)
   end
 
+  def get_history
+    user_detail_hash(user_link)
+  end
+
   def user_link
     "https://api.github.com/users/#{user}"
   end

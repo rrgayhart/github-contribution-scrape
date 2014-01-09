@@ -14,12 +14,16 @@ class User < ActiveRecord::Base
     end
   end
 
-  def add_user_contribution_history
-    
+  def add_all_contribution_history
+    streak = Streak.new(self.github_username)
+    self.contribution_history = streak.get_contributions
   end
 
+  def add_date
+    streak = Streak.new(self.github_username)
+    self.contribution_history << streak.contribution_array_today
+  end
 
-  #store the array of 366 days
   #from then on, just add the latest day to that array
 
 end
