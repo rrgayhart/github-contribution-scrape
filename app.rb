@@ -19,7 +19,7 @@ get '/' do
   erb :index
 end
 
-get '/:name' do
+get '/users/:name' do
   @user_name = params[:name]
   streak = Streak.new(@user_name)
   @history = History.new(@user_name)
@@ -36,5 +36,20 @@ get '/:name' do
   erb :streak
 end
 
+get "/all" do
+  @count = User.all.count
+  erb :count
+end
+
+get "/register" do
+  erb :register
+end
+
+#call from the terminal to access
+#curl --data "github_username=rrgayhart" http://localhost:4567/register
+post "/register" do
+  @user = User.new(:github_username => params[:github_username])
+  @user.save
+end
 
 
