@@ -1,5 +1,6 @@
 require 'sinatra' 
 require 'sinatra/activerecord'
+require 'json'
 Dir[File.dirname(__FILE__) + '/models/*.rb'].each {|file| require file }
 
 env_index = ARGV.index("-e")
@@ -17,6 +18,24 @@ end
 
 get '/' do
   erb :index
+end
+
+get '/find/:name.json' do
+  @user_name = params[:name]
+  streak = Streak.new(@user_name)
+  @history = History.new(@user_name)
+  content_type :json
+  @user_data = {:username => @user_name}
+  @user_data[:contributions_today] = streak.contributions_today
+  @user_data[:current_streak] = streak.current_streak
+  @user_data[:days_without_contributions] = streak.days_without_contributions
+  com = streak.comparison_this_year
+  @user_data[:days_this_year_with_contributions] = streak.days_this_year_with_contributions
+  @user_data[:days_in_the_year] = com[:total_days]
+  @user_data[:percentage_days_commited_this_year] = streak.percentage_commits_per_year(com)
+  long_com = streak.comparison_years_time
+  @user_data[:percentage_days_commited_known_history] = streak.percentage_commits_per_year(long_com)
+  @user_data.to_json
 end
 
 get '/users/:name' do
