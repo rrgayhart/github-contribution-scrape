@@ -15,5 +15,5 @@ test:
 
 production:
   adapter: postgresql
-  database: calendar_production
+  database: calendar/production
   pool: 5
