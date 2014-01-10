@@ -15,7 +15,5 @@ test:
 
 production:
   adapter: postgresql
-  encoding: unicode
   database: calendar_production
   pool: 5
-  password:
