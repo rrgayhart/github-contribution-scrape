@@ -1,19 +1,13 @@
 development:
   adapter: postgresql
-  encoding: unicode
   database: calendar_development
   host: localhost
+  username: rrgayhart
   password:
 
 test:
   adapter: postgresql
-  encoding: unicode
   database: calendar_test
-  pool: 5
   host: localhost
+  username: rrgayhart
   password:
-
-production:
-  adapter: postgresql
-  database: calendar/production
-  pool: 5
