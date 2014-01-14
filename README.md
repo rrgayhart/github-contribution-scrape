@@ -22,4 +22,7 @@ The application uses Postgres in all environments. We also use the Sinatra Activ
 2. Presuming you have Postgres installed (if not: `brew install postgres`):
 3. Run the database migrations with `rake db:migrate
 
-![alt text](https://github.com/rrgayhart/github-contribution-scrape/blob/presentation/screenshot1.jpg?raw=true "Title")
+--------------------
+
+
+![alt text](https://github.com/rrgayhart/github-contribution-scrape/blob/master/presentation/screenshot1.png?raw=true "Title")
