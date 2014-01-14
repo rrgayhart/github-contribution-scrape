@@ -1,3 +1,9 @@
 <%= @count %>
 <br>
-Hello!
+<% @users.each do |user| %>
+  <%= user.github_username %>
+<% end %>
+<br>
+<br>
+<%= @params %>
+<br>

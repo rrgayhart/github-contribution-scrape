@@ -58,6 +58,8 @@ end
 
 get "/all" do
   @count = User.all.count
+  @users = User.all
+  @params = params
   erb :count
 end
 
@@ -68,8 +70,9 @@ end
 #call from the terminal to access
 #curl --data "github_username=rrgayhart" http://localhost:4567/register
 post "/register" do
-  @user = User.new(:github_username => params[:github_username])
-  @user.save
+    @user = User.new(:github_username => params[:github_username])
+    @user.save
+  redirect '/all'
 end
 
 
