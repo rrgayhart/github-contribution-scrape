@@ -105,4 +105,12 @@ class StreakTest < Minitest::Unit::TestCase
     assert_equal "boo", @streak.array_since_joining(history)
   end
 
+  def test_current_streak_does_not_effect_user_array_count
+    assert_equal 366, @streak.user_array.count
+    @streak.current_streak
+    @streak.current_streak
+    @streak.current_streak
+    assert_equal 366, @streak.user_array.count
+  end
+
 end

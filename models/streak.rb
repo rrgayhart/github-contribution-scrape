@@ -1,5 +1,6 @@
 require 'faraday'
 require 'json'
+require 'pry'
 
 class Streak
 
@@ -37,7 +38,7 @@ class Streak
   end
 
   def current_streak
-    array = @user_array
+    array = @user_array + []
     today = array.pop
     current = 0
     current += 1 if today.last != 0

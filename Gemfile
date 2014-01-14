@@ -5,6 +5,7 @@ gem "pg"
 gem "activerecord"
 gem "sinatra-activerecord"
 gem "rake"
+gem "pry"
 
 gem 'minitest', require: false
 gem 'rack-test', require: false
