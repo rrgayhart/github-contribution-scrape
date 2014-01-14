@@ -113,4 +113,6 @@ class StreakTest < Minitest::Unit::TestCase
     assert_equal 366, @streak.user_array.count
   end
 
+  # .json 
+
 end

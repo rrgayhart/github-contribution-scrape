@@ -14,4 +14,8 @@ class MyAppTest < MiniTest::Unit::TestCase
     assert_equal 200, last_response.status
   end
 
+  # test_it_returns_a_valid_user_json_page
+
+  # test_it_returns_an_json_error_if_user_doesnt_exist
+
 end
