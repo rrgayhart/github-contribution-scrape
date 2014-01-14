@@ -47,7 +47,7 @@ get '/users/:name' do
   @no_contributions = streak.days_without_contributions
   @current_streak = streak.current_streak
   com = streak.comparison_this_year
-  @this_year = streak.days_this_year_with_contributions
+  @this_year_cont = streak.days_this_year_with_contributions
   @days = com[:total_days]
   @percentage = streak.percentage_commits_per_year(com)
   @signed_up = @history.user_created_date
