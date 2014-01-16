@@ -30,6 +30,7 @@ get '/find/:name.json' do
     @user_data[:percentage_days_commited_this_year] = streak.percentage_commits_per_year(com)
     long_com = streak.comparison_years_time
     @user_data[:percentage_days_commited_known_history] = streak.percentage_commits_per_year(long_com)
+    @user_data[:commits_this_year] = streak.commits_this_year
     @user_data.to_json
   else
     content_type :json
