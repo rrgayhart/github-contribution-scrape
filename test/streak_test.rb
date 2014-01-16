@@ -97,7 +97,8 @@ class StreakTest < Minitest::Unit::TestCase
   end
 
   def test_commits_this_year_returns_the_correct_count
-    assert_equal 8, @streak.commits_this_year
+    @streak.user_array = self.stub_history_year
+    assert_equal 15, @streak.commits_this_year
   end
 
   def test_array_since_joining_returns_arry_of_days_since_joining

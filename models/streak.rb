@@ -81,7 +81,7 @@ class Streak
 
   def commits_this_year
     dates = @user_array.select do |date|
-      date.last > 1 && date.first.include?(year.to_s)
+      date.first.include?(year.to_s)
     end
     dates.inject(0) {|sum, date| sum + date.last }
   end
