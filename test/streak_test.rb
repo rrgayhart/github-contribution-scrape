@@ -1,5 +1,6 @@
 require 'test_helper'
 require 'github_data'
+require 'pry'
 
 class StreakTest < Minitest::Unit::TestCase
   include GitFake
@@ -24,12 +25,12 @@ class StreakTest < Minitest::Unit::TestCase
   def test_contributions_today_unusual_numbers
     @streak.user_array = self.stub_history_short
     assert_equal 0, @streak.contributions_today
-    @streak.user_array = self.stub_history_large 
+    @streak.user_array = self.stub_history_large
     assert_equal 3000, @streak.contributions_today
   end
 
   def test_contributions_yesterday
-    @streak.user_array = self.stub_history_large 
+    @streak.user_array = self.stub_history_large
     assert_equal 3, @streak.contributions_yesterday
   end
 
@@ -69,7 +70,7 @@ class StreakTest < Minitest::Unit::TestCase
 
   def test_year_returns_default_of_this_year
     assert_equal Date.today.year, @streak.year
-    assert_equal 2012, @streak.year(2012) 
+    assert_equal 2012, @streak.year(2012)
   end
 
   def test_days_this_year_without_contributions_returns_days
@@ -95,6 +96,10 @@ class StreakTest < Minitest::Unit::TestCase
     assert_equal 0.5, @streak.percentage_commits_per_year({:total_days=>10, :contributions=>5})
   end
 
+  def test_commits_this_year_returns_the_correct_count
+    assert_equal 8, @streak.commits_this_year
+  end
+
   def test_array_since_joining_returns_arry_of_days_since_joining
     skip
     history = History.new("newuser")
@@ -113,6 +118,6 @@ class StreakTest < Minitest::Unit::TestCase
     assert_equal 366, @streak.user_array.count
   end
 
-  # .json 
+  # .json
 
 end
