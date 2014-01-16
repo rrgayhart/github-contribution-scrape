@@ -37,7 +37,6 @@ class Streak
     @user_array[-2].last
   end
 
-
   def current_streak
     array = @user_array.dup
     today = array.pop
@@ -73,7 +72,7 @@ class Streak
   end
 
   def select_recent_dates(num)
-    last_num_days = @user_array.reverse.take(num)
+    @user_array.reverse.take(num)
   end
 
   def year(default=nil)
