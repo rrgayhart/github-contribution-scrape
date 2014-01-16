@@ -37,6 +37,7 @@ class Streak
     @user_array[-2].last
   end
 
+
   def current_streak
     array = @user_array.dup
     today = array.pop
@@ -77,6 +78,13 @@ class Streak
 
   def year(default=nil)
     default ||= Date.today.year
+  end
+
+  def commits_this_year
+    dates = @user_array.select do |date|
+      date.last > 1 && date.first.include?(year.to_s)
+    end
+    dates.inject(0) {|sum, date| sum + date.last }
   end
 
   def days_this_year_without_contributions
