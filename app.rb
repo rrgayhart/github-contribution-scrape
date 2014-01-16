@@ -1,4 +1,4 @@
-require 'sinatra' 
+require 'sinatra'
 require 'sinatra/activerecord'
 require './config/environments'
 require 'json'
@@ -16,7 +16,7 @@ end
 
 get '/find/:name.json' do
   if valid_user?(params[:name])
-    @user_name = params[:name] 
+    @user_name = params[:name]
     streak = Streak.new(@user_name)
     @history = History.new(@user_name)
     content_type :json
@@ -67,7 +67,7 @@ get "/all" do
 end
 
 
-#We want to store the commits from the very first date in the array 
+#We want to store the commits from the very first date in the array
 #(the day that is about to be lost from github) - combine old array with the github new array
 #do calculations on this
 #Work in Progress
